@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 10:42:00 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/15 15:06:38 by edpaulin         ###   ########.fr       */
+/*   Created: 2021/10/15 14:06:17 by edpaulin          #+#    #+#             */
+/*   Updated: 2021/10/15 14:57:21 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <stdio.h>
 
-int	main(int argc, char **argv, char **envp)
+char	**get_path(char **envp)
 {
 	int		i;
+	char	*str;
 	char	**my_path;
+	char	*tmp;
 
-	if (!*envp)
-		return (1);
-	i = -1;
-	while (++i < argc)
-		ft_putendl_fd(argv[i], 1);
-	my_path = get_path(envp);
+	i = 0;
+	while (ft_strncmp(envp[i], "PATH=", 5))
+		++i;
+	str = ft_strtrim(envp[i], "PATH=");
+	my_path = ft_split(str, ':');
+	free(str);
 	if (!my_path)
-		return (1);
+		return (NULL);
 	i = -1;
 	while (my_path[++i])
-		ft_putendl_fd(my_path[i], 1);
-	ft_clear_split(my_path);
-	return (0);
+	{
+		tmp = my_path[i];
+		my_path[i] = ft_strjoin(tmp, "/");
+		free(tmp);
+	}
+	return (my_path);
 }

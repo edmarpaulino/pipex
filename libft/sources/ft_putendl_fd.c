@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 10:42:00 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/15 15:06:38 by edpaulin         ###   ########.fr       */
+/*   Created: 2021/08/03 17:17:10 by edpaulin          #+#    #+#             */
+/*   Updated: 2021/10/07 20:34:34 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	main(int argc, char **argv, char **envp)
+/*
+*	DESCRIPTION
+*	Outputs the string ’s’ to the given file descriptor, followed by a newline.
+*/
+
+void	ft_putendl_fd(char *s, int fd)
 {
-	int		i;
-	char	**my_path;
-
-	if (!*envp)
-		return (1);
-	i = -1;
-	while (++i < argc)
-		ft_putendl_fd(argv[i], 1);
-	my_path = get_path(envp);
-	if (!my_path)
-		return (1);
-	i = -1;
-	while (my_path[++i])
-		ft_putendl_fd(my_path[i], 1);
-	ft_clear_split(my_path);
-	return (0);
+	if (s && fd >= 0)
+	{
+		write(fd, s, ft_strlen(s));
+		write(fd, "\n", 1);
+	}
 }

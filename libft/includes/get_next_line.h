@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 10:42:00 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/15 15:06:38 by edpaulin         ###   ########.fr       */
+/*   Created: 2021/08/09 15:43:19 by edpaulin          #+#    #+#             */
+/*   Updated: 2021/10/13 12:14:22 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdio.h>
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int	main(int argc, char **argv, char **envp)
-{
-	int		i;
-	char	**my_path;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
-	if (!*envp)
-		return (1);
-	i = -1;
-	while (++i < argc)
-		ft_putendl_fd(argv[i], 1);
-	my_path = get_path(envp);
-	if (!my_path)
-		return (1);
-	i = -1;
-	while (my_path[++i])
-		ft_putendl_fd(my_path[i], 1);
-	ft_clear_split(my_path);
-	return (0);
-}
+# ifndef OPEN_MAX
+#  define OPEN_MAX 1024
+# endif
+
+# include <unistd.h>
+# include <stdlib.h>
+# include <limits.h>
+
+char	*get_next_line(int fd);
+
+#endif
