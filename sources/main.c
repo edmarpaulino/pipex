@@ -6,29 +6,49 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 10:42:00 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/15 15:06:38 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/15 20:17:53 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <stdio.h>
+
+static void	clean_memory(t_data *data)
+{
+	ft_clear_split(data->sys_path);
+	free(data->infile);
+	free(data->outfile);
+	free(data->cmd1);
+	free(data->cmd2);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
-	int		i;
-	char	**my_path;
+	t_data	data;
 
-	if (!*envp)
+	if (argc < 5 || !*envp)
+	{
+		perror("Error: ");
+		exit(-1);
+	}
+	if (argc == 5)
+	{
+		data.infile = ft_strdup(argv[1]);
+		data.outfile = ft_strdup(argv[4]);
+		data.cmd1 = ft_strdup(argv[2]);
+		data.cmd2 = ft_strdup(argv[3]);
+	}
+	if (!(data.sys_path = get_path(envp)))
 		return (1);
-	i = -1;
-	while (++i < argc)
-		ft_putendl_fd(argv[i], 1);
-	my_path = get_path(envp);
-	if (!my_path)
+	data.param1 = ft_split(data.cmd1, ' ');
+	data.param2 = ft_split(data.cmd2, ' ');
+	if (!pipex(&data, envp))
+	{
+		perror("Error: ");
+		clean_memory(&data);
 		return (1);
-	i = -1;
-	while (my_path[++i])
-		ft_putendl_fd(my_path[i], 1);
-	ft_clear_split(my_path);
+	}
+	clean_memory(&data);
+	ft_clear_split(data.param1);
+	ft_clear_split(data.param2);
 	return (0);
 }
