@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 10:42:00 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/15 20:17:53 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/17 18:20:35 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static void	clean_memory(t_data *data)
 	free(data->cmd2);
 }
 
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	data;
 
 	if (argc < 5 || !*envp)
 	{
-		perror("Error: ");
-		exit(-1);
+		write(2, "Error: ", 7);
+		exit(1);
 	}
 	if (argc == 5)
 	{
