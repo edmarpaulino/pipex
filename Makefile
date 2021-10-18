@@ -6,7 +6,7 @@
 #    By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 08:58:03 by edpaulin          #+#    #+#              #
-#    Updated: 2021/10/16 11:56:32 by edpaulin         ###   ########.fr        #
+#    Updated: 2021/10/18 08:37:10 by edpaulin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,6 @@ fclean: clean
 re: fclean all
 
 norm:
-	norminette */*
+	norminette includes sources libft
 
 .PHONY: all bonus clean fclean re

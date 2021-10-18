@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 10:42:00 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/17 18:20:35 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/18 08:34:49 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	main(int argc, char *argv[], char *envp[])
 		data.cmd1 = ft_strdup(argv[2]);
 		data.cmd2 = ft_strdup(argv[3]);
 	}
-	if (!(data.sys_path = get_path(envp)))
+	data.sys_path = get_path(envp);
+	if (!data.sys_path)
 		return (1);
 	data.param1 = ft_split(data.cmd1, ' ');
 	data.param2 = ft_split(data.cmd2, ' ');

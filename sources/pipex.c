@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 18:30:31 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/17 18:22:51 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/18 08:45:57 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	child1(t_data *data, int end[2], char **envp)
 	while (data->sys_path[++i])
 	{
 		cmd = ft_strjoin(data->sys_path[i], data->param1[0]);
-		if (access(cmd, F_OK) == 0)
+		if (access(cmd, X_OK | F_OK) == 0)
 		{
 			if (execve(cmd, data->param1, envp) == -1)
 				perror("Could not execve cmd1");
@@ -54,7 +54,7 @@ static int	child2(t_data *data, int end[2], char **envp)
 	char	*cmd;
 	int		fd;
 
-	fd = open(data->outfile, O_CREAT | O_WRONLY | O_TRUNC, 0777); 
+	fd = open(data->outfile, O_CREAT | O_WRONLY | O_RDONLY | O_TRUNC, 0644);
 	if (fd == -1)
 	{
 		perror("Could not create outfile");
