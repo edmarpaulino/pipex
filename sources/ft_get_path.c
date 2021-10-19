@@ -1,38 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_path.c                                         :+:      :+:    :+:   */
+/*   ft_get_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 14:06:17 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/15 14:57:21 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/19 19:15:24 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "ft_pipex.h"
 
-char	**get_path(char **envp)
+static int	ft_add_slash(char **path)
 {
-	int		i;
-	char	*str;
-	char	**my_path;
 	char	*tmp;
 
-	i = 0;
-	while (ft_strncmp(envp[i], "PATH=", 5))
-		++i;
-	str = ft_strtrim(envp[i], "PATH=");
-	my_path = ft_split(str, ':');
-	free(str);
-	if (!my_path)
-		return (NULL);
-	i = -1;
-	while (my_path[++i])
+	while (*path)
 	{
-		tmp = my_path[i];
-		my_path[i] = ft_strjoin(tmp, "/");
+		tmp = *path;
+		*path = ft_strjoin(tmp, "/");
+		if (!*path)
+		{
+			*path = tmp;
+			free(tmp);
+			return (-1);
+		}
 		free(tmp);
+		path++;
 	}
-	return (my_path);
+	return (1);
+}
+
+char	**ft_get_path(char **envp)
+{
+	char	*str;
+	char	**path;
+
+	while (ft_strncmp(*envp, "PATH=", 5))
+		envp++;
+	str = ft_strtrim(*envp, "PATH=");
+	path = ft_split(str, ':');
+	free(str);
+	if (!path)
+		return (NULL);
+	if (ft_add_slash(path) == -1)
+		return (NULL);
+	return (path);
 }

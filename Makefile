@@ -6,14 +6,15 @@
 #    By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 08:58:03 by edpaulin          #+#    #+#              #
-#    Updated: 2021/10/18 08:37:10 by edpaulin         ###   ########.fr        #
+#    Updated: 2021/10/19 19:35:43 by edpaulin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=pipex
 LIBFT=./libft/libft.a
 SRC=./sources
-SRCS=main.c get_path.c pipex.c
+SRCS=ft_main.c ft_pipex.c ft_get_path.c ft_get_cmd_path.c ft_clean_memory.c \
+	ft_error_message.c
 OBJ=./objects
 OBJS=$(addprefix $(OBJ)/, $(SRCS:.c=.o))
 CC=cc
