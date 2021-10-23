@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_main.c                                          :+:      :+:    :+:   */
+/*   ft_get_cmd_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/22 15:47:50 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/23 19:13:28 by edpaulin         ###   ########.fr       */
+/*   Created: 2021/10/23 12:17:20 by edpaulin          #+#    #+#             */
+/*   Updated: 2021/10/23 12:24:10 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pipex.h"
 
-int	main(int argc, char **argv, char **envp)
+char	*ft_get_cmd_path(char *cmd, char **sys_path)
 {
-	t_vars	vars;
+	char	*cmd_path;
+	int		i_sys_path;
 
-	if (argc != 5)
+	i_sys_path = 0;
+	while (sys_path[i_sys_path])
 	{
-		ft_putendl_fd("wrong number of params", STDERR);
-		return (1);
+		cmd_path = ft_strjoin(sys_path[i_sys_path], cmd);
+		if (access(cmd_path, F_OK | X_OK) == 0)
+			return (cmd_path);
+		free(cmd_path);
+		i_sys_path++;
 	}
-	if (!ft_init(&vars, argv, envp))
-	{
-		ft_putendl_fd("Init error", STDERR);
-		ft_clear_memory(&vars);
-		return (1);
-	}
-	if (ft_pipex(&vars) == -1)
-	{
-		ft_clear_memory(&vars);
-		return (1);
-	}
-	ft_clear_memory(&vars);
-	return (0);
+	return (NULL);
 }

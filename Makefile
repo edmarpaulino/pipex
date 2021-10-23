@@ -6,7 +6,7 @@
 #    By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 15:20:52 by edpaulin          #+#    #+#              #
-#    Updated: 2021/10/22 19:47:51 by edpaulin         ###   ########.fr        #
+#    Updated: 2021/10/23 19:13:04 by edpaulin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,11 @@ MAN				=	$(UTLSS) $(SRCSS)
 SRC				=	./sources
 SRCS			=	ft_main.c \
 					ft_init.c \
-					ft_get_sys_path.c
+					ft_get_sys_path.c \
+					ft_clear_memory.c \
+					ft_pipex.c \
+					ft_get_cmd_path.c \
+					ft_error_message.c
 
 UTL				=	./utils
 UTLS			=	ft_strlen.c \
@@ -41,6 +45,8 @@ CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 INC				=	-I ./includes
 
+FS				=	-fsanitize=address -g3
+
 DIR				=	mkdir -p $(@D)
 AR				=	ar -rcs
 RM				=	rm -rf
@@ -56,6 +62,9 @@ $(OBJ)/%.o:		%.c
 $(NAME):	$(OBJS)
 	$(CC) $(CFLAGS) $(INC) $(OBJS) -o $(NAME)
 
+fsan:	$(OBJS)
+	$(CC) $(CFLAGS) $(FS) $(INC) $(OBJS) -o $(NAME)
+
 clean:
 	$(RM) $(OBJ)
 
@@ -64,4 +73,6 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+rf:			fclean fsan
+
+.PHONY:		all fsan clean fclean re rf
