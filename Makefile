@@ -6,16 +6,14 @@
 #    By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 15:20:52 by edpaulin          #+#    #+#              #
-#    Updated: 2021/10/23 19:13:04 by edpaulin         ###   ########.fr        #
+#    Updated: 2021/10/24 18:25:52 by edpaulin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	pipex
 
-MAN				=	$(UTLSS) $(SRCSS)
-
-SRC				=	./sources
-SRCS			=	ft_main.c \
+SRC_DIR			=	./sources
+SRC_FILES		=	ft_main.c \
 					ft_init.c \
 					ft_get_sys_path.c \
 					ft_clear_memory.c \
@@ -23,8 +21,8 @@ SRCS			=	ft_main.c \
 					ft_get_cmd_path.c \
 					ft_error_message.c
 
-UTL				=	./utils
-UTLS			=	ft_strlen.c \
+UTL_DIR			=	./utils
+UTL_FILES		=	ft_strlen.c \
 					ft_strlcpy.c \
 					ft_putendl_fd.c \
 					ft_strchr.c \
@@ -35,11 +33,14 @@ UTLS			=	ft_strlen.c \
 					ft_strtrim.c \
 					ft_substr.c \
 					ft_strdup.c
-UTLSS			=	$(addprefix $(UTL)/, $(UTLS))
-SRCSS			=	$(addprefix $(SRC)/, $(SRCS))
 
-OBJ				=	./objects
-OBJS			=	$(addprefix $(OBJ)/, $($(basename MAN):.c=.o))
+SRC_PATH		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
+UTL_PATH		=	$(addprefix $(UTL_DIR)/, $(UTL_FILES))
+
+FILES			=	$(UTL_PATH) $(SRC_PATH)
+
+OBJ_DIR			=	./objects
+OBJ_FILES		=	$(addprefix $(OBJ_DIR)/, $($(basename FILES):.c=.o))
 
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
@@ -47,7 +48,7 @@ INC				=	-I ./includes
 
 FS				=	-fsanitize=address -g3
 
-DIR				=	mkdir -p $(@D)
+MKDIR			=	mkdir -p $(@D)
 AR				=	ar -rcs
 RM				=	rm -rf
 
@@ -55,18 +56,18 @@ RM				=	rm -rf
 
 all:		$(NAME)
 
-$(OBJ)/%.o:		%.c
-	$(DIR)
+$(OBJ_DIR)/%.o:		%.c
+	$(MKDIR)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-$(NAME):	$(OBJS)
-	$(CC) $(CFLAGS) $(INC) $(OBJS) -o $(NAME)
+$(NAME):	$(OBJ_FILES)
+	$(CC) $(CFLAGS) $(INC) $(OBJ_FILES) -o $(NAME)
 
-fsan:	$(OBJS)
-	$(CC) $(CFLAGS) $(FS) $(INC) $(OBJS) -o $(NAME)
+fsan:	$(OBJ_FILES)
+	$(CC) $(CFLAGS) $(FS) $(INC) $(OBJ_FILES) -o $(NAME)
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJ_DIR)
 
 fclean:		clean
 	$(RM) $(NAME)
