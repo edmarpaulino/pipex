@@ -6,41 +6,35 @@
 #    By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 15:20:52 by edpaulin          #+#    #+#              #
-#    Updated: 2021/10/24 18:25:52 by edpaulin         ###   ########.fr        #
+#    Updated: 2021/10/27 19:36:51 by edpaulin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	pipex
+BONUS_NAME		=	pipex_bonus
+BIN_DIR			=	./binaries
+MANDATORY_BIN	=	$(addprefix $(BIN_DIR)/, $(NAME))
+BONUS_BIN		=	$(addprefix $(BIN_DIR)/, $(BONUS_NAME))
+
+SHARED_DIR		=	shared
+SHARED_FILES	=	
+SHARED_PATH		=	$(addprefix $(SHARED_DIR)/, $(SHARED_FILES))
+
+UTIL_DIR		=	utils
+UTIL_FILES		=	
+UTIL_PATH		=	$(addprefix $(UTIL_DIR)/, $(UTIL_FILES))
 
 SRC_DIR			=	./sources
-SRC_FILES		=	ft_main.c \
-					ft_init.c \
-					ft_get_sys_path.c \
-					ft_clear_memory.c \
-					ft_pipex.c \
-					ft_get_cmd_path.c \
-					ft_error_message.c
+SRC_FILES		=	$(SHARED_PATH) \
+					$(UTIL_PATH)
 
-UTL_DIR			=	./utils
-UTL_FILES		=	ft_strlen.c \
-					ft_strlcpy.c \
-					ft_putendl_fd.c \
-					ft_strchr.c \
-					ft_strjoin.c \
-					ft_split.c \
-					ft_clear_split.c \
-					ft_strncmp.c \
-					ft_strtrim.c \
-					ft_substr.c \
-					ft_strdup.c
-
-SRC_PATH		=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
-UTL_PATH		=	$(addprefix $(UTL_DIR)/, $(UTL_FILES))
-
-FILES			=	$(UTL_PATH) $(SRC_PATH)
+BONUS_DIR		=	./sources
+BONUS_FILES		=	$(SHARED_PATH) \
+					$(UTIL_PATH)
 
 OBJ_DIR			=	./objects
-OBJ_FILES		=	$(addprefix $(OBJ_DIR)/, $($(basename FILES):.c=.o))
+OBJ_FILES		=	$(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
+OBJ_BONUS_FILES	=	$(addprefix $(OBJ_DIR)/, $(BONUS_FILES:.c=.o))
 
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
@@ -54,26 +48,36 @@ RM				=	rm -rf
 
 .DEFAULT_GOAL	=	all
 
-all:		$(NAME)
+all:				$(NAME)
 
-$(OBJ_DIR)/%.o:		%.c
+$(OBJ_DIR)/%.o:		$(SRC_DIR)/%.c
 	$(MKDIR)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-$(NAME):	$(OBJ_FILES)
-	$(CC) $(CFLAGS) $(INC) $(OBJ_FILES) -o $(NAME)
+$(NAME):			$(MANDATORY_BIN)
 
-fsan:	$(OBJ_FILES)
-	$(CC) $(CFLAGS) $(FS) $(INC) $(OBJ_FILES) -o $(NAME)
+$(MANDATORY_BIN):	$(OBJ_FILES)
+	$(MKDIR)
+	$(RM) $(BONUS_BIN)
+	$(CC) $(CFLAGS) $(FS) $(INC) $(OBJ_FILES) -o $(MANDATORY_BIN)
+	cp $(MANDATORY_BIN) $(NAME)
+
+bonus:				$(BONUS_BIN)
+
+$(BONUS_BIN):		$(OBJ_BONUS_FILES)
+	$(MKDIR)
+	$(RM) $(MANDATORY_BIN)
+	$(CC) $(CFLAGS) $(FS) $(INC) $(OBJ_BONUS_FILES) -o $(BONUS_BIN)
+	cp $(BONUS_BIN) $(NAME)
 
 clean:
-	$(RM) $(OBJ_DIR)
+	$(RM) $(OBJ_DIR) $(BIN_DIR)
 
-fclean:		clean
+fclean:				clean
 	$(RM) $(NAME)
 
-re:			fclean all
+re:					fclean all
 
-rf:			fclean fsan
+rebonus:			fclean bonus 
 
-.PHONY:		all fsan clean fclean re rf
+.PHONY:				all bonus clean fclean re rebonus
