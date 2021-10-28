@@ -6,7 +6,7 @@
 #    By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 15:20:52 by edpaulin          #+#    #+#              #
-#    Updated: 2021/10/28 10:44:05 by edpaulin         ###   ########.fr        #
+#    Updated: 2021/10/28 11:29:35 by edpaulin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ BONUS_BIN		=	$(addprefix $(BIN_DIR)/, $(BONUS_NAME))
 SHARED_DIR		=	shared
 SHARED_FILES	=	ft_print_error_message.c \
 					ft_get_system_path.c \
-					ft_close_pipe.c
+					ft_close_pipe.c \
+					ft_get_cmd_path.c
 SHARED_PATH		=	$(addprefix $(SHARED_DIR)/, $(SHARED_FILES))
 
 UTIL_DIR		=	utils

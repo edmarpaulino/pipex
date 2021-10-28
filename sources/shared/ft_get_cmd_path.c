@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pipex.h                                         :+:      :+:    :+:   */
+/*   ft_get_cmd_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/27 19:41:17 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/28 11:25:48 by edpaulin         ###   ########.fr       */
+/*   Created: 2021/10/28 11:29:44 by edpaulin          #+#    #+#             */
+/*   Updated: 2021/10/28 11:37:47 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PIPEX_H
-# define FT_PIPEX_H
+#include "ft_shared.h"
 
-# define CMD_NAME 0
-# define CMD1 2
-# define CMD2 3
+char	*ft_get_cmd_path(char *cmd_name, char **system_path)
+{
+	int		index;
+	char	*cmd_path;
 
-# include "ft_shared.h"
-
-int	ft_pipex(t_data *data);
-
-#endif
+	index = 0;
+	cmd_path = FT_NULL;
+	while (system_path[index] != FT_NULL)
+	{
+		cmd_path = ft_strjoin(system_path[index], cmd_name);
+		if (access(cmd_path, F_OK | X_OK) != FT_SUCCESS)
+		{
+			free(cmd_path);
+			cmd_path = FT_NULL;
+		}
+		else
+			break ;
+	}
+	return (cmd_path);
+}

@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 20:23:24 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/28 10:34:05 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/28 11:36:13 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_UTILS_H
 
 # define FT_ERROR -1
-# define FT_SUCCESS 1
+# define FT_SUCCESS 0
 # define FT_STDIN 0
 # define FT_STDOUT 1
 # define FT_STDERR 2
