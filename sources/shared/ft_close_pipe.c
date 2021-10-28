@@ -1,41 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pipex.c                                         :+:      :+:    :+:   */
+/*   ft_close_pipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/27 20:38:16 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/28 10:44:31 by edpaulin         ###   ########.fr       */
+/*   Created: 2021/10/28 10:37:09 by edpaulin          #+#    #+#             */
+/*   Updated: 2021/10/28 10:44:10 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_pipex.h"
+#include "ft_shared.h"
 
-int	ft_pipex(t_data *data)
+int	ft_close_pipe(int *end)
 {
-	int	end[2];
-	int	pid;
 	int	ret_value;
 
 	ret_value = 0;
-	if (pipe(end) != FT_ERROR)
-	{
-		pid = fork();
-		if (pid != FT_ERROR)
-		{
-			if (pid == CHILD_PROCESS)
-				ft_child_process(data);
-			else
-			{
-				ft_parent_process(data);
-				ft_close_pipe(end);
-			}
-		}
-		else
-			ret_value = ft_print_error_message(FT_NULL);
-	}
-	else
-		ret_value = ft_print_error_message(FT_NULL);
+	if (close(end[0]) == FT_ERROR)
+		ret_value = ft_print_error_message(NULL);
+	if (close(end[1]) == FT_ERROR)
+		ret_value = ft_print_error_message(NULL);
 	return (ret_value);
 }

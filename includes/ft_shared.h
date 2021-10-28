@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 20:04:10 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/27 20:47:49 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/28 10:44:53 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ typedef struct s_data
 
 int		ft_print_error_message(char *message);
 char	**ft_get_system_path(char **envp);
+int		ft_close_pipe(int *end);
 
 #endif

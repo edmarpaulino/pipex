@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 20:23:24 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/27 21:25:15 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/28 10:34:05 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define FT_STDOUT 1
 # define FT_STDERR 2
 # define FT_NULL ((void *)0)
+# define CHILD_PROCESS 0
 
 // access - close - read - write - pipe - dup2 - execve - fork
 # include <unistd.h>
