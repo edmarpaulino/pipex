@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:41:17 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/29 09:41:25 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/29 10:41:49 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define CMD_NAME 0
 # define CMD1 2
 # define CMD2 3
+# define CMD_NF "pipex: command not found: "
 
 # include "ft_shared.h"
 

@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 20:38:16 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/29 09:55:45 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/29 11:23:46 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,21 @@ static int	ft_execute_command(t_data *data, int cmd)
 	if (cmd_arguments != FT_NULL)
 	{
 		cmd_path = ft_get_cmd_path(cmd_arguments[CMD_NAME], data->system_path);
-		if (cmd_path != FT_NULL)
+		if (cmd_path == FT_NULL)
+		{
+			cmd_path = ft_strjoin(CMD_NF, cmd_arguments[CMD_NAME]);
+			ret_value = ft_print_error_message(cmd_path);
+		}
+		else
 		{
 			if (execve(cmd_path, cmd_arguments, data->envp) == FT_ERROR)
 				ret_value = ft_print_error_message(NULL);
-			free(cmd_path);
 		}
-		else
-			ret_value = ft_print_error_message("Command not found");
+		free(cmd_path);
+		ft_clear_split(cmd_arguments);
 	}
 	else
 		ret_value = ft_print_error_message("Error in command's agurments");
-	ft_clear_split(cmd_arguments);
 	return (ret_value);
 }
 
@@ -67,7 +70,7 @@ static int	ft_child_process(int *end, t_data *data)
 	}
 	else
 	{
-		ret_value = ft_print_error_message(NULL);
+		ret_value = ft_print_error_message(FT_NULL);
 		ft_close_pipe(end);
 	}
 	return (ret_value);
@@ -90,7 +93,7 @@ static int	ft_parent_process(int *end, t_data *data)
 	}
 	else
 	{
-		ret_value = ft_print_error_message(NULL);
+		ret_value = ft_print_error_message(FT_NULL);
 		ft_close_pipe(end);
 	}
 	return (ret_value);
@@ -113,7 +116,6 @@ int	ft_pipex(t_data *data)
 			else
 				ret_value = ft_parent_process(end, data);
 			waitpid(pid, NULL, 0);
-			ft_close_pipe(end);
 		}
 		else
 			ret_value = ft_print_error_message(FT_NULL);
