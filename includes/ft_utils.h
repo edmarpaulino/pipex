@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 20:23:24 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/29 11:34:20 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/29 13:51:10 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ char	**ft_split(char const *s, char c);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_clear_split(char **ptr);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

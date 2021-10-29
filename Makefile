@@ -6,7 +6,7 @@
 #    By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 15:20:52 by edpaulin          #+#    #+#              #
-#    Updated: 2021/10/28 14:56:30 by edpaulin         ###   ########.fr        #
+#    Updated: 2021/10/29 13:51:32 by edpaulin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ UTIL_FILES		=	ft_strlen.c \
 					ft_split.c \
 					ft_strlcpy.c \
 					ft_strjoin.c \
-					ft_clear_split.c
+					ft_clear_split.c \
+					ft_strcmp.c
 UTIL_PATH		=	$(addprefix $(UTIL_DIR)/, $(UTIL_FILES))
 
 SRC_DIR			=	./sources
@@ -44,7 +45,8 @@ SRC_FILES		=	ft_main.c \
 					$(UTIL_PATH)
 
 BONUS_DIR		=	./sources
-BONUS_FILES		=	$(SHARED_PATH) \
+BONUS_FILES		=	ft_main_bonus.c \
+					$(SHARED_PATH) \
 					$(UTIL_PATH)
 
 OBJ_DIR			=	./objects
@@ -56,7 +58,7 @@ CFLAGS			=	-Wall -Wextra -Werror
 INC				=	-I ./includes
 
 # FIXME		->		REMOVE FSANITIZE
-FS				=	#-fsanitize=address -g3
+FS				=	-fsanitize=address -g3
 
 MKDIR			=	mkdir -p $(@D)
 AR				=	ar -rcs
