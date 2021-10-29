@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 20:23:24 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/29 13:51:10 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/29 19:58:14 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@
 # define FT_STDERR 2
 # define FT_NULL ((void *)0)
 # define CHILD_PROCESS 0
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 1024
+# endif
 
 // access - close - read - write - pipe - dup2 - execve - fork
 # include <unistd.h>
@@ -50,5 +58,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_clear_split(char **ptr);
 int		ft_strcmp(const char *s1, const char *s2);
+char	*get_next_line(int fd);
 
 #endif
