@@ -6,7 +6,7 @@
 #    By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 15:20:52 by edpaulin          #+#    #+#              #
-#    Updated: 2021/10/28 11:29:35 by edpaulin         ###   ########.fr        #
+#    Updated: 2021/10/28 14:56:30 by edpaulin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ CFLAGS			=	-Wall -Wextra -Werror
 INC				=	-I ./includes
 
 # FIXME		->		REMOVE FSANITIZE
-FS				=	-fsanitize=address -g3
+FS				=	#-fsanitize=address -g3
 
 MKDIR			=	mkdir -p $(@D)
 AR				=	ar -rcs

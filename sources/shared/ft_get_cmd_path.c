@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 11:29:44 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/28 11:37:47 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/28 18:49:12 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*ft_get_cmd_path(char *cmd_name, char **system_path)
 		{
 			free(cmd_path);
 			cmd_path = FT_NULL;
+			index++;
 		}
 		else
 			break ;

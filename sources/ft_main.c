@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 19:54:45 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/28 10:44:44 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/29 09:30:55 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char *argv[], char *envp[])
 	int		ret_value;
 	t_data	data;
 
-	ret_value = 0;
+	ret_value = FT_SUCCESS;
 	if (argc == 5)
 	{
 		data.system_path = ft_get_system_path(envp);
