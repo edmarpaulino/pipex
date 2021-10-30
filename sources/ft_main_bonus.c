@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 11:45:49 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/29 20:00:37 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/30 13:48:58 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char *argv[], char *envp[])
 			data.argc = argc;
 			data.argv = argv;
 			data.envp = envp;
-			ret_value = ft_pipex_bonus(&data);
+			ret_value = ft_init_bonus(&data);
 			ft_clear_split(data.system_path);
 		}
 		else
