@@ -6,7 +6,7 @@
 #    By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 15:20:52 by edpaulin          #+#    #+#              #
-#    Updated: 2021/10/30 13:48:22 by edpaulin         ###   ########.fr        #
+#    Updated: 2021/10/30 19:58:33 by edpaulin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ UTIL_FILES		=	ft_strlen.c \
 					ft_strjoin.c \
 					ft_clear_split.c \
 					ft_strcmp.c \
-					get_next_line.c
+					get_next_line.c \
+					ft_lastchr.c
 UTIL_PATH		=	$(addprefix $(UTIL_DIR)/, $(UTIL_FILES))
 
 SRC_DIR			=	./sources

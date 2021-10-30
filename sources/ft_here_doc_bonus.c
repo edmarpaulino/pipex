@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 09:41:56 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/30 15:49:41 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/30 19:59:01 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static int	ft_check_limiter(char *line, char *limiter)
 {
 	int	ret_value;
 
-	line[ft_strlen(line) - 1] = '\0';
+	if (ft_lastchr(line) == '\n')
+		line[ft_strlen(line) - 1] = '\0';
 	if (ft_strcmp(line, limiter) == FT_SUCCESS)
 		ret_value = FT_TRUE;
 	else
