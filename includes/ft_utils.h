@@ -6,13 +6,15 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 20:23:24 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/29 19:58:14 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/30 09:47:43 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_UTILS_H
 # define FT_UTILS_H
 
+# define FT_TRUE 1
+# define FT_FALSE 0
 # define FT_ERROR -1
 # define FT_SUCCESS 0
 # define FT_RET_ERROR 1
