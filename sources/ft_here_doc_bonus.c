@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 09:41:56 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/30 10:47:36 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/30 15:49:41 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_here_doc_bonus(t_data *data)
 			write(FT_STDOUT, "pipex here_doc> ", 16);
 			line = get_next_line(FT_STDIN);
 		}
+		free(line);
 	}
 	else
 		ft_clear_and_exit(data);
