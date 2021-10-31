@@ -6,7 +6,7 @@
 #    By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 15:20:52 by edpaulin          #+#    #+#              #
-#    Updated: 2021/10/30 20:25:50 by edpaulin         ###   ########.fr        #
+#    Updated: 2021/10/31 10:24:47 by edpaulin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRC_FILES		=	ft_main.c \
 BONUS_DIR		=	./sources
 BONUS_FILES		=	ft_main_bonus.c \
 					ft_init_bonus.c \
+					ft_clear_and_exit_bonus.c \
 					ft_here_doc_bonus.c \
 					ft_pipex_bonus.c \
 					$(SHARED_PATH) \
