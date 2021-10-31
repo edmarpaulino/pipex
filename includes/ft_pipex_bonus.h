@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 11:44:54 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/31 10:20:30 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/31 12:27:52 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "ft_shared.h"
 
 int		ft_init_bonus(t_data *data);
-void	ft_clear_and_exit_bonus(t_data *data, char option);
+void	ft_clear_and_exit_bonus(t_data *data, char *message, char option);
 void	ft_here_doc_bonus(t_data *data);
 int		ft_pipex_bonus(int cmd_index, t_data *data);
 

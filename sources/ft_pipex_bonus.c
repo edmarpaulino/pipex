@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 10:07:12 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/31 10:22:41 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/31 12:40:26 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,68 +29,63 @@ static int	ft_open_file(char *file_name, char open_option, t_data *data)
 	return (fd);
 }
 
-static int	ft_execute_command(t_data *data, int cmd)
+static void	ft_execute_command(t_data *data, int cmd)
 {
-	int		ret_value;
 	char	*cmd_path;
 	char	**cmd_arguments;
 
-	ret_value = FT_SUCCESS;
 	cmd_arguments = ft_split(data->argv[cmd], ' ');
 	if (cmd_arguments != FT_NULL)
 	{
 		cmd_path = ft_get_cmd_path(cmd_arguments[CMD_NAME], data->system_path);
-		if (cmd_path == FT_NULL)
+		if (cmd_path != FT_NULL)
 		{
-			cmd_path = ft_strjoin(CMD_NF, cmd_arguments[CMD_NAME]);
-			ret_value = ft_print_error_message(cmd_path);
+			if (execve(cmd_path, cmd_arguments, data->envp) == FT_ERROR)
+				ft_clear_and_exit_bonus(data, FT_NULL, WITH_MESSAGE);
 		}
 		else
 		{
-			if (execve(cmd_path, cmd_arguments, data->envp) == FT_ERROR)
-				ret_value = ft_print_error_message(NULL);
+			cmd_path = ft_strjoin(CMD_NF, cmd_arguments[CMD_NAME]);
+			ft_clear_and_exit_bonus(data, cmd_path, WITH_MESSAGE);
 		}
 		free(cmd_path);
-		ft_clear_split(cmd_arguments);
+		ft_clear_and_exit_bonus(data, FT_NULL, WITHOUT_MESSAGE);
 	}
 	else
-		ret_value = ft_print_error_message("Error in command's agurments");
-	return (ret_value);
+	{
+		cmd_path = ft_strdup("Error in command's agurments");
+		ft_clear_and_exit_bonus(data, cmd_path, WITH_MESSAGE);
+	}
 }
 
-static int	ft_child_process(int *end, int cmd_index, t_data *data)
+static void	ft_child_process(int *end, int cmd_index, t_data *data)
 {
 	int	fd;
-	int	ret_value;
 
 	close(end[0]);
-	ret_value = FT_SUCCESS;
 	if (cmd_index == (data->argc - 2))
-		ft_clear_and_exit_bonus(data, WITHOUT_MESSAGE);
+		ft_clear_and_exit_bonus(data, FT_NULL, WITHOUT_MESSAGE);
 	else
 	{
 		if (cmd_index == 2)
 		{
 			fd = ft_open_file(data->argv[INFILE], FT_STDIN, data);
 			if (fd == FT_ERROR)
-				ft_clear_and_exit_bonus(data, WITH_MESSAGE);
+				ft_clear_and_exit_bonus(data, FT_NULL, WITH_MESSAGE);
 			dup2(fd, FT_STDIN);
 			close(fd);
 		}
 		dup2(end[1], FT_STDOUT);
 		close(end[1]);
-		ret_value = ft_execute_command(data, cmd_index);
+		ft_execute_command(data, cmd_index);
 	}
-	return (ret_value);
 }
 
-static int	ft_parent_process(int *end, int cmd_index, int pid, t_data *data)
+static void	ft_parent_process(int *end, int cmd_index, int pid, t_data *data)
 {
 	int	fd;
-	int	ret_value;
 
 	close(end[1]);
-	ret_value = FT_SUCCESS;
 	if (cmd_index == (data->argc - 2))
 	{
 		waitpid(pid, NULL, 0);
@@ -99,11 +94,10 @@ static int	ft_parent_process(int *end, int cmd_index, int pid, t_data *data)
 		{
 			dup2(fd, FT_STDOUT);
 			close(fd);
-			ret_value = ft_execute_command(data, cmd_index);
+			ft_execute_command(data, cmd_index);
 		}
-		ft_clear_and_exit_bonus(data, WITHOUT_MESSAGE);
+		ft_clear_and_exit_bonus(data, FT_NULL, WITHOUT_MESSAGE);
 	}
-	return (ret_value);
 }
 
 int	ft_pipex_bonus(int cmd_index, t_data *data)
@@ -119,10 +113,10 @@ int	ft_pipex_bonus(int cmd_index, t_data *data)
 		if (pid != FT_ERROR)
 		{
 			if (pid == CHILD_PROCESS)
-				ret_value = ft_child_process(end, cmd_index, data);
+				ft_child_process(end, cmd_index, data);
 			else
 			{
-				ret_value = ft_parent_process(end, cmd_index, pid, data);
+				ft_parent_process(end, cmd_index, pid, data);
 				dup2(end[0], FT_STDIN);
 				close(end[0]);
 			}
