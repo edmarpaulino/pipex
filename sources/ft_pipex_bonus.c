@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 10:07:12 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/31 12:40:26 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/31 12:51:15 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	ft_execute_command(t_data *data, int cmd)
 	}
 	else
 	{
-		cmd_path = ft_strdup("Error in command's agurments");
+		cmd_path = ft_strdup("pipex: error in command's argurments");
 		ft_clear_and_exit_bonus(data, cmd_path, WITH_MESSAGE);
 	}
 }
