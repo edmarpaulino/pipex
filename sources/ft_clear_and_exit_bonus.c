@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_bonus.c                                    :+:      :+:    :+:   */
+/*   ft_clear_and_exit_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/30 09:35:13 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/31 09:50:23 by edpaulin         ###   ########.fr       */
+/*   Created: 2021/10/31 10:15:10 by edpaulin          #+#    #+#             */
+/*   Updated: 2021/10/31 10:20:20 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pipex_bonus.h"
 
-int	ft_init_bonus(t_data *data)
+void	ft_clear_and_exit_bonus(t_data *data, char option)
 {
-	int	ret_value;
-	int	cmd_index;
-
-	ret_value = FT_SUCCESS;
-	if (ft_strcmp(data->argv[HERE_DOC], "here_doc") == FT_SUCCESS)
+	if (option == WITHOUT_MESSAGE)
 	{
-		cmd_index = 3;
-		ft_here_doc_bonus(data);
+		ft_clear_split(data->system_path);
+		exit(1);
 	}
 	else
-		cmd_index = 2;
-	while (cmd_index < (data->argc - 1))
 	{
-		ret_value = ft_pipex_bonus(cmd_index, data);
-		cmd_index++;
+		ft_clear_split(data->system_path);
+		exit(ft_print_error_message(FT_NULL));
 	}
-	return (ret_value);
 }

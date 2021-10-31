@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 10:07:12 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/30 19:50:30 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/31 10:22:41 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,14 @@ static int	ft_child_process(int *end, int cmd_index, t_data *data)
 	close(end[0]);
 	ret_value = FT_SUCCESS;
 	if (cmd_index == (data->argc - 2))
-	{
-		ft_clear_split(data->system_path);
-		exit(1);
-	}
+		ft_clear_and_exit_bonus(data, WITHOUT_MESSAGE);
 	else
 	{
 		if (cmd_index == 2)
 		{
 			fd = ft_open_file(data->argv[INFILE], FT_STDIN, data);
 			if (fd == FT_ERROR)
-			{
-				ft_clear_split(data->system_path);
-				exit(ft_print_error_message(FT_NULL));
-			}
+				ft_clear_and_exit_bonus(data, WITH_MESSAGE);
 			dup2(fd, FT_STDIN);
 			close(fd);
 		}
@@ -107,8 +101,7 @@ static int	ft_parent_process(int *end, int cmd_index, int pid, t_data *data)
 			close(fd);
 			ret_value = ft_execute_command(data, cmd_index);
 		}
-		ft_clear_split(data->system_path);
-		exit(1);
+		ft_clear_and_exit_bonus(data, WITHOUT_MESSAGE);
 	}
 	return (ret_value);
 }
@@ -126,9 +119,7 @@ int	ft_pipex_bonus(int cmd_index, t_data *data)
 		if (pid != FT_ERROR)
 		{
 			if (pid == CHILD_PROCESS)
-			{
 				ret_value = ft_child_process(end, cmd_index, data);
-			}
 			else
 			{
 				ret_value = ft_parent_process(end, cmd_index, pid, data);
