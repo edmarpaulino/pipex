@@ -6,7 +6,7 @@
 #    By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 15:20:52 by edpaulin          #+#    #+#              #
-#    Updated: 2021/10/31 10:25:41 by edpaulin         ###   ########.fr        #
+#    Updated: 2021/10/31 19:06:56 by edpaulin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ BONUS_BIN		=	$(addprefix $(BIN_DIR)/, $(BONUS_NAME))
 
 SHARED_DIR		=	shared
 SHARED_FILES	=	ft_print_error_message.c \
+					ft_clear_and_exit.c \
 					ft_get_system_path.c \
 					ft_close_pipe.c \
 					ft_get_cmd_path.c
@@ -49,7 +50,6 @@ SRC_FILES		=	ft_main.c \
 BONUS_DIR		=	./sources
 BONUS_FILES		=	ft_main_bonus.c \
 					ft_init_bonus.c \
-					ft_clear_and_exit_bonus.c \
 					ft_here_doc_bonus.c \
 					ft_pipex_bonus.c \
 					$(SHARED_PATH) \
@@ -60,11 +60,11 @@ OBJ_FILES		=	$(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 OBJ_BONUS_FILES	=	$(addprefix $(OBJ_DIR)/, $(BONUS_FILES:.c=.o))
 
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror #-std=c11 -ggdb3
 INC				=	-I ./includes
 
 # FIXME		->		REMOVE FSANITIZE
-FS				=	-fsanitize=address -g3
+FS				=	#-fsanitize=address -g3
 
 MKDIR			=	mkdir -p $(@D)
 AR				=	ar -rcs

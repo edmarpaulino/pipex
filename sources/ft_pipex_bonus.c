@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 10:07:12 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/31 12:51:15 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/31 15:09:10 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,19 @@ static void	ft_execute_command(t_data *data, int cmd)
 		if (cmd_path != FT_NULL)
 		{
 			if (execve(cmd_path, cmd_arguments, data->envp) == FT_ERROR)
+			{
+				free(cmd_path);
+				ft_clear_split(cmd_arguments);
 				ft_clear_and_exit_bonus(data, FT_NULL, WITH_MESSAGE);
+			}
 		}
 		else
 		{
 			cmd_path = ft_strjoin(CMD_NF, cmd_arguments[CMD_NAME]);
-			ft_clear_and_exit_bonus(data, cmd_path, WITH_MESSAGE);
+			ft_print_error_message(cmd_path);
+			free(cmd_path);
+			ft_clear_split(cmd_arguments);
+			ft_clear_and_exit_bonus(data, FT_NULL, WITHOUT_MESSAGE);
 		}
 		free(cmd_path);
 		ft_clear_and_exit_bonus(data, FT_NULL, WITHOUT_MESSAGE);
@@ -54,7 +61,9 @@ static void	ft_execute_command(t_data *data, int cmd)
 	else
 	{
 		cmd_path = ft_strdup("pipex: error in command's argurments");
-		ft_clear_and_exit_bonus(data, cmd_path, WITH_MESSAGE);
+		ft_print_error_message(cmd_path);
+		free(cmd_path);
+		ft_clear_and_exit_bonus(data, FT_NULL, WITHOUT_MESSAGE);
 	}
 }
 
