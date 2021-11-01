@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 09:35:13 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/31 15:52:14 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/11/01 10:54:19 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	ft_init_bonus(t_data *data)
 	{
 		cmd_index = 3;
 		ft_here_doc_bonus(data);
-		return (0);
 	}
 	else
 		cmd_index = 2;

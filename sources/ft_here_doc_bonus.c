@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 09:41:56 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/31 17:25:07 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/11/01 10:54:14 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	ft_here_doc_bonus(t_data *data)
 			free(line);
 	}
 	else
-		ft_clear_and_exit_bonus(data, FT_NULL, WITH_MESSAGE);
+		ft_clear_and_exit(data, FT_NULL, WITH_MESSAGE);
 	dup2(end[0], FT_STDIN);
 	if (ft_close_pipe(end) == FT_ERROR)
-		ft_clear_and_exit_bonus(data, FT_NULL, WITH_MESSAGE);
+		ft_clear_and_exit(data, FT_NULL, WITH_MESSAGE);
 }

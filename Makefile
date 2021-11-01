@@ -6,7 +6,7 @@
 #    By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/22 15:20:52 by edpaulin          #+#    #+#              #
-#    Updated: 2021/10/31 19:06:56 by edpaulin         ###   ########.fr        #
+#    Updated: 2021/11/01 10:20:45 by edpaulin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ OBJ_FILES		=	$(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 OBJ_BONUS_FILES	=	$(addprefix $(OBJ_DIR)/, $(BONUS_FILES:.c=.o))
 
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror #-std=c11 -ggdb3
+CFLAGS			=	-Wall -Wextra -Werror -std=c11 -ggdb3
 INC				=	-I ./includes
 
 # FIXME		->		REMOVE FSANITIZE
