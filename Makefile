@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/10/22 15:20:52 by edpaulin          #+#    #+#              #
-#    Updated: 2021/11/01 10:20:45 by edpaulin         ###   ########.fr        #
+#    Created: 2021/11/01 11:45:05 by edpaulin          #+#    #+#              #
+#    Updated: 2021/11/01 11:45:09 by edpaulin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,11 +60,8 @@ OBJ_FILES		=	$(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 OBJ_BONUS_FILES	=	$(addprefix $(OBJ_DIR)/, $(BONUS_FILES:.c=.o))
 
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror -std=c11 -ggdb3
+CFLAGS			=	-Wall -Wextra -Werror
 INC				=	-I ./includes
-
-# FIXME		->		REMOVE FSANITIZE
-FS				=	#-fsanitize=address -g3
 
 MKDIR			=	mkdir -p $(@D)
 AR				=	ar -rcs
@@ -83,7 +80,7 @@ $(NAME):			$(MANDATORY_BIN)
 $(MANDATORY_BIN):	$(OBJ_FILES)
 	$(MKDIR)
 	$(RM) $(BONUS_BIN)
-	$(CC) $(CFLAGS) $(FS) $(INC) $(OBJ_FILES) -o $(MANDATORY_BIN)
+	$(CC) $(CFLAGS) $(INC) $(OBJ_FILES) -o $(MANDATORY_BIN)
 	cp $(MANDATORY_BIN) $(NAME)
 
 bonus:				$(BONUS_BIN)
@@ -91,7 +88,7 @@ bonus:				$(BONUS_BIN)
 $(BONUS_BIN):		$(OBJ_BONUS_FILES)
 	$(MKDIR)
 	$(RM) $(MANDATORY_BIN)
-	$(CC) $(CFLAGS) $(FS) $(INC) $(OBJ_BONUS_FILES) -o $(BONUS_BIN)
+	$(CC) $(CFLAGS) $(INC) $(OBJ_BONUS_FILES) -o $(BONUS_BIN)
 	cp $(BONUS_BIN) $(NAME)
 
 clean:

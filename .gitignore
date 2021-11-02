@@ -7,3 +7,4 @@
 tests
 pipex-tester
 **.sh
+**.gitignore
