@@ -40,20 +40,22 @@ $> < file1 cmd1 | cmd2 > file2
 ```
 <br>
 Examples
+
 ```bash
 $> ./pipex infile "ls -l" "wc -l" outfile
 ```
 should be the same as 
 ```bash
-< infile ls -l | wc -l > outfile
+$> < infile ls -l | wc -l > outfile
 ```
 <br>
+
 ```bash
 $> ./pipex infile "grep a1" "wc -w" outfile
 ```
 should be the same as
 ```bash
-< infile grep a1 | wc -w > outfile
+$> < infile grep a1 | wc -w > outfile
 ```
 
 <p align=center>
@@ -65,21 +67,23 @@ Bonus
 </h3>
 
 • Handle multiple pipes:
+
 ```bash
 $> ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
 ```
 Must be equivalent to:
 ```bash
-< file1 cmd1 | cmd2 | cmd3 ... | cmdn > file2
+$> < file1 cmd1 | cmd2 | cmd3 ... | cmdn > file2
 ```
 <br>
 • Support « and » when the first parameter is "here_doc"
+
 ```bash
 $> ./pipex here_doc LIMITER cmd cmd1 file
 ```
 Must be equivalent to:
 ```bash
-cmd << LIMITER | cmd1 >> file
+$> cmd << LIMITER | cmd1 >> file
 ```
 
 ---
