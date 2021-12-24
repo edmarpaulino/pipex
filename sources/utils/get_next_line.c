@@ -5,101 +5,102 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/29 15:46:25 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/11/01 10:23:15 by edpaulin         ###   ########.fr       */
+/*   Created: 2021/08/09 15:43:22 by edpaulin          #+#    #+#             */
+/*   Updated: 2021/12/24 11:04:23 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_utils.h"
 
-static int	is_line(char *buffer)
+static ssize_t	has_line(char *static_buffer)
 {
-	while (*buffer)
+	ssize_t	i;
+
+	if (static_buffer)
 	{
-		if (*(buffer++) == '\n')
-			return (1);
+		i = 0;
+		while (static_buffer[i] != '\n' && static_buffer[i])
+			i++;
+		if (static_buffer[i] == '\n')
+			return (i);
 	}
-	return (0);
+	return (-1);
 }
 
-static void	clean_static_buffer(char **static_buffer, char **new_static_buffer)
+static ssize_t	get_buffer(int fd, char **static_buffer)
 {
-	free(*new_static_buffer);
-	*new_static_buffer = NULL;
-	*static_buffer = NULL;
-}
+	char	*buffer;
+	char	*tmp;
+	ssize_t	ret;
 
-static char	*get_line(char **static_buffer, char **line)
-{
-	size_t	line_len;
-	char	*new_static_buffer;
-
-	line_len = 0;
-	new_static_buffer = NULL;
-	while ((*static_buffer)[line_len] != '\n' \
-			&& (*static_buffer)[line_len] != '\0')
-		++line_len;
-	if ((*static_buffer)[line_len] == '\n')
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char *));
+	if (!buffer)
+		return (-1);
+	ret = read(fd, buffer, BUFFER_SIZE);
+	while (ret > 0)
 	{
-		*line = ft_substr(*static_buffer, 0, (line_len + 1));
-		new_static_buffer = ft_strdup(&(*static_buffer)[line_len + 1]);
-	}
-	else
-		*line = ft_strdup(*static_buffer);
-	free(*static_buffer);
-	*static_buffer = new_static_buffer;
-	if (**line == '\0')
-	{
-		free(*line);
-		*line = NULL;
-	}
-	if (*new_static_buffer == '\0')
-		clean_static_buffer(static_buffer, &new_static_buffer);
-	return (*line);
-}
-
-static char	*read_file(int fd, char **buffer)
-{
-	static char	*static_buffer[OPEN_MAX];
-	char		*line;
-	char		*temp;
-	ssize_t		n;
-
-	n = 1;
-	if (!static_buffer[fd])
-		static_buffer[fd] = ft_strdup("");
-	while (!is_line(static_buffer[fd]) && n)
-	{
-		n = read(fd, *buffer, BUFFER_SIZE);
-		if (n < 0)
+		buffer[ret] = '\0';
+		if (!*static_buffer)
+			*static_buffer = ft_strdup(buffer);
+		else
 		{
-			free(buffer);
-			free(static_buffer[fd]);
-			return (NULL);
+			tmp = *static_buffer;
+			*static_buffer = ft_strjoin(tmp, buffer);
+			free(tmp);
 		}
-		(*buffer)[n] = '\0';
-		temp = static_buffer[fd];
-		static_buffer[fd] = ft_strjoin(temp, *buffer);
-		free(temp);
+		if (has_line(*static_buffer) > 0)
+			break ;
+		ret = read(fd, buffer, BUFFER_SIZE);
 	}
-	free(*buffer);
-	*buffer = NULL;
-	return (get_line(&static_buffer[fd], &line));
+	free(buffer);
+	return (ret);
+}
+
+static void	get_line(char **static_buffer, char **line)
+{
+	ssize_t	i;
+	char	*tmp;
+
+	if (*static_buffer)
+	{
+		i = has_line(*static_buffer);
+		if (i >= 0)
+		{
+			tmp = *static_buffer;
+			*line = ft_substr(tmp, 0, i + 1);
+			*static_buffer = ft_substr(tmp, i + 1, ft_strlen(tmp));
+			free(tmp);
+			if (ft_strlen(*static_buffer) == 0)
+			{
+				free(*static_buffer);
+				*static_buffer = NULL;
+			}
+		}
+		else
+		{
+			*line = ft_strdup(*static_buffer);
+			free(*static_buffer);
+			*static_buffer = NULL;
+		}
+	}
 }
 
 char	*get_next_line(int fd)
 {
-	char		*buffer;
+	static char	*static_buffer[OPEN_MAX];
+	char		*line;
+	ssize_t		ret;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(*buffer));
-	if (!buffer)
-		return (NULL);
-	if (read(fd, buffer, 0) < 0)
+	ret = get_buffer(fd, &static_buffer[fd]);
+	line = NULL;
+	if (ret == -1)
 	{
-		free(buffer);
-		return (NULL);
+		if (static_buffer[fd])
+			free(static_buffer[fd]);
 	}
-	return (read_file(fd, &buffer));
+	else
+		get_line(&static_buffer[fd], &line);
+	return (line);
 }
