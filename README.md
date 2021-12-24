@@ -27,6 +27,7 @@ mechanism that you already know.
 <h3 align=center>
 Mandatory
 </h3>
+In the Pipex project we should simulate the same behavior as the pipe on unix systems with output redirection.<br>
 
 • Pipex program should be executed in this way:
 ```bash
