@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 20:45:23 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/11/02 16:26:20 by edpaulin         ###   ########.fr       */
+/*   Updated: 2021/10/28 10:22:17 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	ft_add_path_slash(char **system_path)
 			if (system_path[index] == FT_NULL)
 			{
 				system_path[index] = temp;
+				free(temp);
 				ft_clear_split(system_path);
 				system_path = FT_NULL;
 				break ;
