@@ -48,7 +48,7 @@ static ssize_t	get_buffer(int fd, char **static_buffer)
 			*static_buffer = ft_strjoin(tmp, buffer);
 			free(tmp);
 		}
-		if (has_line(*static_buffer) > 0)
+		if (has_line(*static_buffer) >= 0)
 			break ;
 		ret = read(fd, buffer, BUFFER_SIZE);
 	}
