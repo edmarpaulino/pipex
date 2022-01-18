@@ -6,7 +6,7 @@
 #    By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 11:45:05 by edpaulin          #+#    #+#              #
-#    Updated: 2021/11/01 11:45:09 by edpaulin         ###   ########.fr        #
+#    Updated: 2022/01/18 17:11:41 by edpaulin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,12 @@ SHARED_FILES	=	ft_print_error_message.c \
 					ft_clear_and_exit.c \
 					ft_get_system_path.c \
 					ft_close_pipe.c \
-					ft_get_cmd_path.c
+					ft_get_cmd_path.c \
+					ft_give_back_char.c \
+					ft_get_next_char.c \
+					ft_peek_next_char.c \
+					ft_skip_white_spaces.c \
+					ft_get_argument_vector.c
 SHARED_PATH		=	$(addprefix $(SHARED_DIR)/, $(SHARED_FILES))
 
 UTIL_DIR		=	utils
@@ -38,7 +43,10 @@ UTIL_FILES		=	ft_strlen.c \
 					ft_clear_split.c \
 					ft_strcmp.c \
 					get_next_line.c \
-					ft_lastchr.c
+					ft_lastchr.c \
+					ft_isspace.c \
+					ft_calloc.c \
+					ft_bzero.c
 UTIL_PATH		=	$(addprefix $(UTIL_DIR)/, $(UTIL_FILES))
 
 SRC_DIR			=	./sources

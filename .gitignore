@@ -7,4 +7,5 @@
 tests
 pipex-tester
 **.sh
-**.gitignore
+.gitignore
+dgodoy

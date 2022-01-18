@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_error_message.c                           :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/27 20:03:28 by edpaulin          #+#    #+#             */
-/*   Updated: 2022/01/18 17:31:44 by edpaulin         ###   ########.fr       */
+/*   Created: 2021/08/03 15:09:52 by edpaulin          #+#    #+#             */
+/*   Updated: 2022/01/18 17:10:35 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_shared.h"
+#include "ft_utils.h"
 
-int	ft_print_error_message(char *message)
+void	*ft_calloc(size_t count, size_t size)
 {
-	if (message != FT_NULL)
-	{
-		ft_putendl_fd(message, FT_STDERR);
-		if (ft_strcmp(message, CMD_NF_ERR) == 0)
-			return (FT_CMD_NOT_FOUND);
-	}
-	else
-		perror("pipex");
-	return (FT_RET_ERROR);
+	void	*ptr;
+
+	ptr = (void *)malloc(count * size);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, (count * size));
+	return (ptr);
 }

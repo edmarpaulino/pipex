@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 10:07:12 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/11/01 10:54:06 by edpaulin         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:13:01 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_execute_command(t_data *data, int cmd)
 	char	*cmd_path;
 	char	**cmd_arguments;
 
-	cmd_arguments = ft_split(data->argv[cmd], ' ');
+	cmd_arguments = ft_get_argument_vector(data->argv[cmd]);
 	if (cmd_arguments != FT_NULL)
 	{
 		cmd_path = ft_get_cmd_path(cmd_arguments[CMD_NAME], data->system_path);

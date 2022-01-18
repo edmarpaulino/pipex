@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_cmd_path.c                                  :+:      :+:    :+:   */
+/*   ft_skip_white_spaces.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/28 11:29:44 by edpaulin          #+#    #+#             */
-/*   Updated: 2022/01/18 17:21:48 by edpaulin         ###   ########.fr       */
+/*   Created: 2022/01/18 16:58:08 by edpaulin          #+#    #+#             */
+/*   Updated: 2022/01/18 17:09:19 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_shared.h"
 
-char	*ft_get_cmd_path(char *cmd_name, char **system_path)
+void	ft_skip_white_spaces(t_source *src)
 {
-	int		index;
-	char	*cmd_path;
+	int	c;
 
-	index = 0;
-	cmd_path = FT_NULL;
-	if (!!ft_strchr(cmd_name, '/'))
-		return (ft_strdup(cmd_name));
-	while (system_path[index] != FT_NULL)
+	if (!src || !src->buffer)
+		return ;
+	c = ft_peek_next_char(src);
+	while (c != END_OF_SOURCE && ft_isspace(c))
 	{
-		cmd_path = ft_strjoin(system_path[index], cmd_name);
-		if (access(cmd_path, X_OK) != FT_SUCCESS)
-		{
-			free(cmd_path);
-			cmd_path = FT_NULL;
-			index++;
-		}
-		else
-			break ;
+		ft_get_next_char(src);
+		c = ft_peek_next_char(src);
 	}
-	return (cmd_path);
 }

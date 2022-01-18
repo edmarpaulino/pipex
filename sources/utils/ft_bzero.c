@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_error_message.c                           :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/27 20:03:28 by edpaulin          #+#    #+#             */
-/*   Updated: 2022/01/18 17:31:44 by edpaulin         ###   ########.fr       */
+/*   Created: 2021/08/03 10:27:33 by edpaulin          #+#    #+#             */
+/*   Updated: 2022/01/18 17:11:04 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_shared.h"
+#include "ft_utils.h"
 
-int	ft_print_error_message(char *message)
+void	ft_bzero(void *s, size_t n)
 {
-	if (message != FT_NULL)
-	{
-		ft_putendl_fd(message, FT_STDERR);
-		if (ft_strcmp(message, CMD_NF_ERR) == 0)
-			return (FT_CMD_NOT_FOUND);
-	}
-	else
-		perror("pipex");
-	return (FT_RET_ERROR);
+	while (n--)
+		*(unsigned char *)(s++) = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: edpaulin <edpaulin@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 20:23:24 by edpaulin          #+#    #+#             */
-/*   Updated: 2021/10/30 19:58:17 by edpaulin         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:30:25 by edpaulin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define FT_ERROR -1
 # define FT_SUCCESS 0
 # define FT_RET_ERROR 1
+# define FT_CMD_NOT_FOUND 127
 # define FT_STDIN 0
 # define FT_STDOUT 1
 # define FT_STDERR 2
@@ -62,5 +63,8 @@ void	ft_clear_split(char **ptr);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*get_next_line(int fd);
 int		ft_lastchr(const char *str);
+int		ft_isspace(int c);
+void	*ft_calloc(size_t count, size_t size);
+void	ft_bzero(void *s, size_t n);
 
 #endif
